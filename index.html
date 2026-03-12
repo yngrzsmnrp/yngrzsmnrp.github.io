@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С полугодом, Любимая!</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(145deg, #fbe9f0 0%, #ffe4e1 100%);
+            color: #4a2c2f;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0.2em 0;
+            color: #b13e5c;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            font-size: 1.4em;
+            color: #7f4f5a;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed #e7a9b8;
+            padding-bottom: 20px;
+        }
+        .heart {
+            font-size: 4em;
+            color: #d96c7e;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .photo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .photo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 160px;
+        }
+        .photo-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 15px;
+            background: #ddd;
+        }
+        .letter {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: left;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .main-button {
+            background: #b13e5c;
+            border: none;
+            color: white;
+            font-size: 1.3em;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid white;
+            margin-top: 20px;
+        }
+        .main-button:hover {
+            background: #8f2e48;
+            transform: scale(1.05);
+        }
+        
+        /* Стили для таймера отношений */
+        .timer-container {
+            background: white;
+            border-radius: 60px;
+            padding: 25px 20px;
+            margin: 30px 0;
+            box-shadow: 0 15px 30px rgba(177, 62, 92, 0.15);
+            border: 2px solid rgba(177, 62, 92, 0.2);
+        }
+        
+        .timer-title {
+            font-size: 1.2em;
+            color: #7f4f5a;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .timer-block {
+            background: linear-gradient(145deg, #fbe9f0, #ffe4e1);
+            border-radius: 30px;
+            padding: 15px 10px;
+            min-width: 90px;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.8), 0 5px 15px rgba(177,62,92,0.2);
+        }
+        
+        .timer-number {
+            font-size: 2.8em;
+            font-weight: bold;
+            color: #b13e5c;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .timer-label {
+            font-size: 0.9em;
+            color: #7f4f5a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .timer-seconds {
+            animation: pulse 1s infinite;
+        }
+        
+        /* Стили для капсулы времени */
+        .capsule-container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            padding: 30px 20px;
+            margin: 40px 0 20px;
+            border: 3px dashed #b13e5c;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .capsule-container::before {
+            content: "⏳";
+            font-size: 3em;
+            opacity: 0.1;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .capsule-title {
+            font-size: 2em;
+            color: #b13e5c;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .capsule-subtitle {
+            font-size: 1.1em;
+            color: #7f4f5a;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .capsule-timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        
+        .capsule-block {
+            background: #fbe9f0;
+            border-radius: 25px;
+            padding: 12px 8px;
+            min-width: 70px;
+            border: 2px solid #e7a9b8;
+        }
+        
+        .capsule-number {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #b13e5c;
+            line-height: 1;
+        }
+        
+        .capsule-label {
+            font-size: 0.8em;
+            color: #7f4f5a;
+            text-transform: uppercase;
+        }
+        
+        .capsule-button {
+            background: #d9b1b1;
+            border: none;
+            color: white;
+            font-size: 1.3em;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transition: 0.3s;
+            border: 2px solid white;
+            margin: 15px 0 5px;
+        }
+        
+        .capsule-button.active {
+            background: #b13e5c;
+            cursor: pointer;
+            opacity: 1;
+        }
+        
+        .capsule-button.active:hover {
+            background: #8f2e48;
+            transform: scale(1.05);
+        }
+        
+        .capsule-note {
+            font-size: 0.9em;
+            color: #7f4f5a;
+            margin-top: 10px;
+        }
+        
+        /* Стили для квиза */
+        .quiz-container {
+            background: white;
+            border-radius: 40px;
+            padding: 30px 25px;
+            margin: 40px 0 20px;
+            box-shadow: 0 15px 30px rgba(177, 62, 92, 0.1);
+            border: 2px solid #e7a9b8;
+        }
+        
+        .quiz-title {
+            font-size: 2em;
+            color: #b13e5c;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-subtitle {
+            font-size: 1.1em;
+            color: #7f4f5a;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-progress {
+            font-size: 1.1em;
+            color: #b13e5c;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .question {
+            background: #fbe9f0;
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .question-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #b13e5c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #e7a9b8;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid #e7a9b8;
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: #ffe4e1;
+            border-color: #b13e5c;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            background: #b13e5c;
+            color: white;
+            border-color: #b13e5c;
+        }
+        
+        .option.multi-selected {
+            background: #b13e5c;
+            color: white;
+            border-color: #b13e5c;
+        }
+        
+        .option-marker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            margin-right: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .option.selected .option-marker {
+            background: white;
+            color: #b13e5c;
+        }
+        
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .quiz-nav-button {
+            background: #b13e5c;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1;
+            border: 2px solid white;
+        }
+        
+        .quiz-nav-button:hover:not(:disabled) {
+            background: #8f2e48;
+            transform: scale(1.02);
+        }
+        
+        .quiz-nav-button:disabled {
+            background: #d9b1b1;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .quiz-feedback {
+            margin: 20px 0;
+            padding: 20px;
+            background: #ffe4e1;
+            border-radius: 30px;
+            font-size: 1.1em;
+            color: #4a2c2f;
+            border-left: 5px solid #b13e5c;
+            text-align: left;
+            min-height: 60px;
+        }
+        
+        .quiz-feedback.hidden {
+            display: none;
+        }
+        
+        .quiz-reset {
+            background: none;
+            border: 2px solid #e7a9b8;
+            color: #7f4f5a;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        
+        .quiz-reset:hover {
+            background: #e7a9b8;
+            color: white;
+        }
+        
+        @media (max-width: 600px) {
+            .timer {
+                gap: 10px;
+            }
+            .timer-block {
+                min-width: 70px;
+                padding: 12px 5px;
+            }
+            .timer-number {
+                font-size: 2.2em;
+            }
+            
+            .capsule-block {
+                min-width: 60px;
+                padding: 10px 5px;
+            }
+            .capsule-number {
+                font-size: 1.8em;
+            }
+            
+            .question {
+                padding: 15px;
+            }
+            
+            .option {
+                padding: 10px 15px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart">❤️</div>
+        <h1>С ПОЛУГОДОМ!</h1>
+        <div class="subtitle">6 месяцев счастья</div>
+
+        <!-- ТОЧНЫЙ ТАЙМЕР С 13 СЕНТЯБРЯ 2025 -->
+        <div class="timer-container">
+            <div class="timer-title">МЫ ВМЕСТЕ УЖЕ</div>
+            <div class="timer" id="timer">
+                <div class="timer-block">
+                    <div class="timer-number" id="days">00</div>
+                    <div class="timer-label">Дней</div>
+                </div>
+                <div class="timer-block">
+                    <div class="timer-number" id="hours">00</div>
+                    <div class="timer-label">Часов</div>
+                </div>
+                <div class="timer-block">
+                    <div class="timer-number" id="minutes">00</div>
+                    <div class="timer-label">Минут</div>
+                </div>
+                <div class="timer-block timer-seconds">
+                    <div class="timer-number" id="seconds">00</div>
+                    <div class="timer-label">Секунд</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ГАЛЕРЕЯ С ФОТОГРАФИЯМИ -->
+        <div class="photo-grid">
+            <div class="photo-card">
+                <img src="https://i.ibb.co/20YDcfjC/photo-2025-12-29-01-58-21.jpg" alt="Фото 1">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/gZVw8RDc/photo-2026-02-02-00-32-48.jpg" alt="Фото 2">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/dwYgVGGS/photo-2026-02-02-22-02-56.jpg" alt="Фото 3">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/WvLxjqGQ/photo-2026-02-02-22-00-12.jpg" alt="Фото 4">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/PsXP9m6X/photo-2026-02-11-10-42-34.jpg" alt="Фото 5">
+            </div>
+            <div class="photo-card">
+                <img src="https://i.ibb.co/tMttCspF/photo-2026-02-05-21-43-34.jpg" alt="Фото 6">
+            </div>
+        </div>
+
+        <!-- Письмо с поздравлением (ОБНОВЛЕНО) -->
+        <div class="letter">
+            <p><strong>Моя любимая Даша,</strong></p>
+            <p>Мы уже встречаемся с тобой полгода. Когда я сел к Тиане в машину, я даже не подозревал, что все может сложиться именно так) Хоть у меня и плохая память, я помню каждый момент, проведенный с тобой. Ты стала частью моей жизни. Я верю, что через несколько лет мы не будем встречаться. Не будем встречаться, не потому что разлюбим друг друга, а потому что я тебе сделаю предложение)</p>
+            <p>Я благодарен тебе за твою заботу, за поддержку, за теплые слова, за то, что ты всегда рядом. Я благодарен за то, что ты есть.</p>
+            <p>Люблю тебя</p>
+        </div>
+
+        <!-- КВИЗ -->
+        <div class="quiz-container">
+            <div class="quiz-title">📝 Наш квиз</div>
+            <div class="quiz-subtitle">Проверь, как хорошо ты помнишь наши моменты</div>
+            
+            <div class="quiz-progress" id="quizProgress">Вопрос 1 из 6</div>
+            
+            <div id="quizQuestions"></div>
+            
+            <div class="quiz-nav">
+                <button class="quiz-nav-button" id="prevBtn" onclick="prevQuestion()" disabled>← Назад</button>
+                <button class="quiz-nav-button" id="nextBtn" onclick="nextQuestion()">Далее →</button>
+            </div>
+            
+            <div id="quizFeedback" class="quiz-feedback hidden"></div>
+            
+            <button class="quiz-reset" onclick="resetQuiz()">🔄 Пройти заново</button>
+        </div>
+
+        <!-- КАПСУЛА ВРЕМЕНИ ДО ГОДА ОТНОШЕНИЙ -->
+        <div class="capsule-container">
+            <div class="capsule-title">📦 Капсула времени</div>
+            <div class="capsule-subtitle">Послание, которое откроется через полгода</div>
+            
+            <div class="capsule-timer" id="capsuleTimer">
+                <div class="capsule-block">
+                    <div class="capsule-number" id="capsuleDays">00</div>
+                    <div class="capsule-label">Дней</div>
+                </div>
+                <div class="capsule-block">
+                    <div class="capsule-number" id="capsuleHours">00</div>
+                    <div class="capsule-label">Часов</div>
+                </div>
+                <div class="capsule-block">
+                    <div class="capsule-number" id="capsuleMinutes">00</div>
+                    <div class="capsule-label">Минут</div>
+                </div>
+                <div class="capsule-block">
+                    <div class="capsule-number" id="capsuleSeconds">00</div>
+                    <div class="capsule-label">Секунд</div>
+                </div>
+            </div>
+            
+            <button class="capsule-button" id="capsuleButton" onclick="openCapsule()">
+                🔒 Открыть капсулу
+            </button>
+            <div class="capsule-note" id="capsuleNote">
+                Капсула откроется 13 сентября 2026 года
+            </div>
+        </div>
+
+        <!-- Кнопка-сюрприз (теперь с твоим именем) -->
+        <button class="main-button" onclick="alert('От автора: Даша, я тебя люблю! ❤️')">Нажми меня</button>
+    </div>
+
+    <script>
+        // ТАЙМЕР С 13 СЕНТЯБРЯ 2025 (сколько вместе)
+        function updateTimer() {
+            const startDate = new Date(2025, 8, 13);
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // ТАЙМЕР ДО ГОДА ОТНОШЕНИЙ (13 сентября 2026)
+        function updateCapsuleTimer() {
+            const oneYearDate = new Date(2026, 8, 13);
+            const now = new Date();
+            const diff = oneYearDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById('capsuleDays').textContent = '00';
+                document.getElementById('capsuleHours').textContent = '00';
+                document.getElementById('capsuleMinutes').textContent = '00';
+                document.getElementById('capsuleSeconds').textContent = '00';
+                
+                const button = document.getElementById('capsuleButton');
+                button.classList.add('active');
+                button.innerHTML = '📦 Открыть капсулу';
+                button.style.cursor = 'pointer';
+                document.getElementById('capsuleNote').textContent = 'Капсула готова к открытию!';
+            } else {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('capsuleDays').textContent = days.toString().padStart(2, '0');
+                document.getElementById('capsuleHours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('capsuleMinutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('capsuleSeconds').textContent = seconds.toString().padStart(2, '0');
+            }
+        }
+        
+        // Функция открытия капсулы
+        function openCapsule() {
+            const diff = new Date(2026, 8, 13) - new Date();
+            if (diff <= 0) {
+                alert('🎉 С годовщиной! Здесь будет твое послание. Добавь текст позже!');
+            } else {
+                alert('Капсула еще не готова. Осталось подождать 🌸');
+            }
+        }
+        
+        // Запускаем таймеры
+        updateTimer();
+        updateCapsuleTimer();
+        setInterval(updateTimer, 1000);
+        setInterval(updateCapsuleTimer, 1000);
+        
+        // ДАННЫЕ ДЛЯ КВИЗА
+        const quizData = [
+            {
+                question: "Где мы познакомились?",
+                options: ["В машине у Тианы", "В кафе", "В парке", "На учебе"],
+                correct: 0,
+                comment: "Знакомство было очень неожиданным. Возвращаясь в тот день, я и подумать не мог, что все сложится так удачно"
+            },
+            {
+                question: "Что мы любим заказывать вместе?",
+                options: ["Суши", "Бургеры", "Пиццу", "Шаурму"],
+                correct: 1,
+                comment: "Правильно! Наша любимая еда. Сейчас, пока пишу этот текст, вспомнил, как ты заказывала только картошку, потому что ты стеснялась есть( мне казалось это очень странным)"
+            },
+            {
+                question: "Какой цветок я перепутал с гортензией?",
+                options: ["Роза", "Пион", "Гипсофил", "Ромашка"],
+                correct: 2,
+                comment: "да эт я"
+            },
+            {
+                question: "Какой мой любимый способ провести вечер с тобой?",
+                options: ["Смотреть сериалы", "Гулять в парке", "Готовить ужин", "Разговаривать до утра"],
+                correct: null,
+                comment: "Все варианты ответов правильные) не важно что мы с тобой делаем, я в любом случае ценю все время проведенное с тобой)",
+                allCorrect: true
+            },
+            {
+                question: "Какое у меня прозвище для тебя?",
+                options: ["Зайка", "Медвежонок", "Солнышко", "Котик"],
+                correct: 1,
+                comment: "Да! потому что ты маленькая и пушистая"
+            },
+            {
+                question: "Где был наш первый поцелуй?",
+                options: ["У Тианы дома", "В парке", "В кино", "На набережной"],
+                correct: 0,
+                comment: "Опять Тиана....."
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let quizAnswers = new Array(quizData.length).fill(null);
+        let multiAnswers = new Array(quizData.length).fill(null).map(() => []);
+        let specialQuestionCompleted = false;
+        
+        // Отображение текущего вопроса
+        function renderCurrentQuestion() {
+            const container = document.getElementById('quizQuestions');
+            const q = quizData[currentQuestion];
+            
+            let html = `<div class="question">`;
+            html += `<div class="question-text">${currentQuestion + 1}. ${q.question}</div>`;
+            html += `<div class="options" id="options-${currentQuestion}">`;
+            
+            q.options.forEach((opt, optIndex) => {
+                let selectedClass = '';
+                
+                if (q.allCorrect) {
+                    // Для вопроса с несколькими правильными ответами
+                    if (multiAnswers[currentQuestion].includes(optIndex)) {
+                        selectedClass = 'multi-selected';
+                    }
+                } else {
+                    // Для обычных вопросов
+                    if (quizAnswers[currentQuestion] === optIndex) {
+                        selectedClass = 'selected';
+                    }
+                }
+                
+                html += `<div class="option ${selectedClass}" onclick="selectOption(${currentQuestion}, ${optIndex})">`;
+                html += `<span class="option-marker">${String.fromCharCode(65 + optIndex)}</span>`;
+                html += opt;
+                html += `</div>`;
+            });
+            
+            html += `</div>`;
+            html += `</div>`;
+            
+            container.innerHTML = html;
+            
+            // Обновляем прогресс
+            document.getElementById('quizProgress').textContent = `Вопрос ${currentQuestion + 1} из ${quizData.length}`;
+            
+            // Обновляем состояние кнопок навигации
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        }
+        
+        // Выбор варианта
+        function selectOption(questionIndex, optionIndex) {
+            const q = quizData[questionIndex];
+            
+            if (q.allCorrect) {
+                // Для вопроса "все ответы правильные" - множественный выбор
+                const currentMulti = multiAnswers[questionIndex];
+                const optionIndexInArray = currentMulti.indexOf(optionIndex);
+                
+                if (optionIndexInArray === -1) {
+                    // Добавляем вариант
+                    currentMulti.push(optionIndex);
+                } else {
+                    // Убираем вариант
+                    currentMulti.splice(optionIndexInArray, 1);
+                }
+                
+                // Проверяем, выбраны ли все 4 варианта
+                if (currentMulti.length === 4 && !specialQuestionCompleted) {
+                    specialQuestionCompleted = true;
+                    showFeedback(q.comment);
+                } else if (currentMulti.length < 4) {
+                    // Если выбрано меньше 4, показываем подсказку
+                    showFeedback("Попробуй выбрать все варианты ответов");
+                }
+                
+                renderCurrentQuestion();
+            } else {
+                // Для обычных вопросов
+                if (quizAnswers[questionIndex] === null) {
+                    if (optionIndex === q.correct) {
+                        quizAnswers[questionIndex] = optionIndex;
+                        showFeedback(q.comment);
+                        renderCurrentQuestion();
+                    } else {
+                        showFeedback("Не совсем так... Попробуй еще раз");
+                    }
+                }
+            }
+        }
+        
+        // Показать комментарий
+        function showFeedback(text) {
+            const feedbackEl = document.getElementById('quizFeedback');
+            feedbackEl.textContent = text;
+            feedbackEl.classList.remove('hidden');
+        }
+        
+        // Следующий вопрос
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                renderCurrentQuestion();
+                // Скрываем фидбек при переходе
+                document.getElementById('quizFeedback').classList.add('hidden');
+            }
+        }
+        
+        // Предыдущий вопрос
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderCurrentQuestion();
+                document.getElementById('quizFeedback').classList.add('hidden');
+            }
+        }
+        
+        // Сброс квиза
+        function resetQuiz() {
+            currentQuestion = 0;
+            quizAnswers = new Array(quizData.length).fill(null);
+            multiAnswers = new Array(quizData.length).fill(null).map(() => []);
+            specialQuestionCompleted = false;
+            document.getElementById('quizFeedback').classList.add('hidden');
+            renderCurrentQuestion();
+        }
+        
+        // Инициализация
+        renderCurrentQuestion();
+        console.log("Сайт создан с любовью специально для тебя! ❤️");
+    </script>
+</body>
+</html>
